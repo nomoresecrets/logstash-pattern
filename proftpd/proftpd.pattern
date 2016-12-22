@@ -1,0 +1,4 @@
+PROFTPD_FIELD %{DATA}|-
+
+MY_PROFTPDLOG \[%{TIMESTAMP_ISO8601:log_timestamp}\] %{IP:remote_host} %{PROFTPD_FIELD:username} %{WORD:protocol} \[%{POSINT:pid}\] \"%{WORD:action}\" \"%{PROFTPD_FIELD:filename}\" \"%{PROFTPD_FIELD:action_status}\" %{PROFTPD_FIELD:filesize} %{PROFTPD_FIELD:action_code} \[%{GREEDYDATA:clientcommand}\]
+

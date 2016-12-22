@@ -1,0 +1,11 @@
+MY_VSFTPD_TIMESTAMP %{DAY} %{MONTH} +%{MONTHDAY} %{TIME} %{YEAR}
+MY_VSFTPD_ACTIONSTATUS (OK|FAIL)
+MY_VSFTPD_ACTION (CONNECT|LOGIN|UPLOAD|DOWNLOAD|RENAME|DELETE|DEBUG|MKDIR)
+ 
+MY_VSFTPDLOG1 %{MY_VSFTPD_TIMESTAMP:log_timestamp} \[pid %{NUMBER:pid}\] (%{MY_VSFTPD_ACTION:action}|\[%{USERNAME:username}\] %{MY_VSFTPD_ACTIONSTATUS:action_status} %{MY_VSFTPD_ACTION:action}): Client \"%{IPV4:remote_host}\"
+MY_VSFTPDLOG2 %{MY_VSFTPD_TIMESTAMP:log_timestamp} \[pid %{NUMBER:pid}\] \[%{USERNAME:username}\] %{MY_VSFTPD_ACTION:action}: Client \"%{IPV4:remote_host}\", \"%{DATA:debug_msg}\"
+MY_VSFTPDLOG3 %{MY_VSFTPD_TIMESTAMP:log_timestamp} \[pid %{NUMBER:pid}\] \[%{USERNAME:username}\] %{MY_VSFTPD_ACTIONSTATUS:action_status} %{MY_VSFTPD_ACTION:action}: Client \"%{IPV4:remote_host}\", \"%{DATA:filename}\"
+MY_VSFTPDLOG4 %{MY_VSFTPD_TIMESTAMP:log_timestamp} \[pid %{NUMBER:pid}\] \[%{USERNAME:username}\] %{MY_VSFTPD_ACTIONSTATUS:action_status} %{MY_VSFTPD_ACTION:action}: Client \"%{IPV4:remote_host}\", \"%{DATA:filename}\", %{BASE10NUM:transferspeed}
+MY_VSFTPDLOG5 %{MY_VSFTPD_TIMESTAMP:log_timestamp} \[pid %{NUMBER:pid}\] \[%{USERNAME:username}\] %{MY_VSFTPD_ACTIONSTATUS:action_status} %{MY_VSFTPD_ACTION:action}: Client \"%{IPV4:remote_host}\", \"%{DATA:filename}\", %{BASE10NUM:filesize} bytes, %{BASE10NUM:transferspeed}
+ 
+MY_VSFTPDLOG (?:%{MY_VSFTPDLOG5}|%{MY_VSFTPDLOG4}|%{MY_VSFTPDLOG3}|%{MY_VSFTPDLOG2}|%{MY_VSFTPDLOG1})
